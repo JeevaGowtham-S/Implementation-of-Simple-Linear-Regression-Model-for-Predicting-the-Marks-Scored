@@ -8,79 +8,116 @@ To write a program to predict the marks scored by a student using the simple lin
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1.Import the required libraries and read the dataframe.
-
-2.Assign hours to X and scores to Y.
-
-3.Implement training set and test set of the dataframe
-
-4.Plot the required graph both for test data and training data.
-
-5.Find the values of MSE , MAE and RMSE.
-
+1. Import the standard Libraries.
+2. Set variables for assigning dataset values.
+3. Import linear regression from sklearn.
+4. Assign the points for representing in the graph.
+5. Predict the regression for marks by using the representation of the graph.
+6. Compare the graphs and hence we obtained the linear regression for the given datas.
 ## Program:
-```
-/*
+``` py
 Program to implement the simple linear regression model for predicting the marks scored.
 Developed by: JEEVAGOWTHAM S
-RegisterNumber: 212222230053
+RegisterNumber:  212222230053
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error,mean_squared_error
-df=pd.read_csv('student_scores.csv')
-print(df)
-df.head(0)
-df.tail(0)
-print(df.head())
-print(df.tail())
-x = df.iloc[:,:-1].values
-print(x)
-y = df.iloc[:,1].values
-print(y)
+df=pd.read_csv('/content/student_scores.csv')
+df.head()
+df.tail()
+
+#segregating data to variables
+x=df.iloc[:,:-1].values
+x
+y=df.iloc[:,1].values
+y
+
 from sklearn.model_selection import train_test_split
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=1/3,random_state=0)
+
 from sklearn.linear_model import LinearRegression
-regressor = LinearRegression()
+regressor=LinearRegression()
 regressor.fit(x_train,y_train)
-y_pred = regressor.predict(x_test)
-print(y_pred)
-print(y_test)
-## Graph plot for training data
-plt.scatter(x_train,y_train,color='black')
-plt.plot(x_train,regressor.predict(x_train),color='blue')
-plt.title("Hours vs Scores(Training set)")
+y_pred=regressor.predict(x_test)
+
+#displaying predicted values
+y_pred
+
+#displaying actual values
+y_test
+
+#graph plot for training data
+
+plt.scatter(x_train,y_train,color="black") 
+plt.plot(x_train,regressor.predict(x_train),color="red") 
+plt.title("Hours VS scores (learning set)") 
+plt.xlabel("Hours") 
+plt.ylabel("Scores") 
+plt.show()
+
+#Graph plot for test data
+
+plt.scatter(x_test,y_test,color="cyan")
+plt.plot(x_test,regressor.predict(x_test),color="green")
+plt.title("Hours VS scores (learning set)")
 plt.xlabel("Hours")
 plt.ylabel("Scores")
 plt.show()
-## Graph plot for test data
-plt.scatter(x_test,y_test,color='black')
-plt.plot(x_train,regressor.predict(x_train),color='red')
-plt.title("Hours vs Scores(Testing set)")
-plt.xlabel("Hours")
-plt.ylabel("Scores")
-plt.show()
-mse=mean_absolute_error(y_test,y_pred)
+
+mse=mean_squared_error(y_test,y_pred)
 print('MSE = ',mse)
+
 mae=mean_absolute_error(y_test,y_pred)
 print('MAE = ',mae)
-rmse=np.sqrt(mse)
-print("RMSE= ",rmse)
 
-*/
+import numpy as np
+rmse=np.sqrt(mse)
+print('RMSE = ',rmse)
 ```
 
 ## Output:
-![ML21](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/d6517ddd-06b4-42d2-b38f-ae9c08b03189)
+### df.head():
+![image](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/ad734e9a-22c7-4cd2-bebe-71c48b23ab6a)
 
-![ML22](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/cec0de3e-975d-4347-a1f8-26ca520e391e)
+### df.tail():
+![image](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/b71b9c91-0634-4f26-9949-404f54156f8a)
 
-![ML23](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/a6291ca1-ef40-407e-8e6f-0c10ab748c91)
 
-![LM4](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/9f10c1aa-5380-40df-8e72-e40c44e57475)
+### Array value of X:
+![image](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/0993d160-b0b3-4f43-b4ad-a7348a04a489)
 
-![LM5](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/a4cf77dd-2ef0-4b56-bc32-7abf1a95369d)
+
+### Array value of Y:
+![image](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/93811d4e-4cca-4c63-ab77-594d8eaa45c2)
+
+
+
+### Values of Y prediction:
+![image](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/fa6f8067-88ea-48da-8307-cde4077edcfd)
+
+
+
+### Values of Y test:
+![image](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/b472729a-8171-4a26-99bf-3e3e3e007d97)
+
+
+
+### Training Set Graph:
+![image](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/8f2e90b5-36ae-44c6-85a0-0afcab4c42c6)
+
+
+
+### Test Set Graph:
+![image](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/79a2bdaf-7b83-4990-bed6-6a641b425456)
+
+
+
+### Values of MSE, MAE and RMSE:
+![image](https://github.com/JeevaGowtham-S/Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored/assets/118042624/f9d8122f-8cfc-43fc-a6ab-025242845515)
+
+
 
 ## Result:
 Thus the program to implement the simple linear regression model for predicting the marks scored is written and verified using python programming.
